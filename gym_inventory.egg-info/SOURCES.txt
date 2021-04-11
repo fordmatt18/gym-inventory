@@ -1,0 +1,7 @@
+README.md
+setup.py
+gym_inventory.egg-info/PKG-INFO
+gym_inventory.egg-info/SOURCES.txt
+gym_inventory.egg-info/dependency_links.txt
+gym_inventory.egg-info/requires.txt
+gym_inventory.egg-info/top_level.txt
