@@ -1,11 +1,11 @@
 gym-inventory is a gym environment for inventory control with lost sales and positive lead times. 
 
-The information below is taken from the latex write-up, where additional details can be located. 
+The information below is mostly taken from the latex write-up, where additional details can be located. 
 
 
 ## State Space
 
-The state of the system consists of two components: I_t, representing the current inventory level, and x_t = (x_{1,t}, ... , x_{L,t}), a vector of inventory orders that will arrive in the future (often referred to as a pipeline vector) [1]. We only require that these quantities be non-negative, and thus, the state space is S = { (I_t, \textbf{x}_t) : I_t, x_{1,t}, ... , x_{L,t} >= 0} [1]. For initial conditions, as in Xin & Goldberg (2016), we assume I_1 = 0 and x_{i,1} = 0 for i = 1, ..., L.
+The state of the system consists of two components: I_t, representing the current inventory level, and x_t = (x_{1,t}, ... , x_{L,t}), a vector of inventory orders that will arrive in the future (often referred to as a pipeline vector) [1]. We only require that these quantities be non-negative, and thus, the state space is S = { (I_t, x_t) : I_t, x_{1,t}, ... , x_{L,t} >= 0} [1]. For initial conditions, as in Xin & Goldberg (2016), we assume I_1 = 0 and x_{i,1} = 0 for i = 1, ..., L.
 
 
 ## Action Space
