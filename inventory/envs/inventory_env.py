@@ -4,16 +4,20 @@ import sys
 
 class Inventory(gym.Env):
 
-    def __init__(self, start_inv = 1, alpha = 1, h = 1, p = 1, L = 1, length = 10000): # note I just chose some default values
-        self.start_inv = start_inv # starting inventory
+    def __init__(self, alpha = 1.0, h = 1.0, p = 1.0, L = 1, length = 10000, **kwargs): # note I just chose some default values
         self.alpha = alpha  # parameter of exponenetial demand, 1/alpha is mean demand
         self.h = h  # holding cost
         self.p = p # lost sales penalty
         self.L = L # lead time
         self.length = length # how many periods to run simulation
+        
+        for key in kwargs:
+            setattr(self, key, kwargs[key])    
+            
+        self.opt_const = (1/self.alpha)*(1-(self.h/(2*self.p+self.h))**(1/2)) # optimal constant order amount
+        self.opt_const_val = (1/self.alpha)*((self.h*(2*self.p + self.h))**(1/2)-self.h) # optimal constant order policy value
         self.steps = 0 # keeps track of how many steps have been done in this episode
-        self.state = np.zeros(self.L + 1) # first entry is current inventory, remaining entries are outstanding orders
-        self.state[0] = self.start_inv # setting starting inventory
+        self.state = np.zeros(self.L + 1) + self.opt_const # first entry is current inventory, remaining entries are outstanding orders, initialize all to optimal constant order amount
         self.action_space = gym.spaces.Box(low=0.0, high=np.inf, shape=(1,))
         self.observation_space = gym.spaces.Box(low=0.0, high=np.inf, shape=(self.L + 1,))
         self.seed()
@@ -55,6 +59,5 @@ class Inventory(gym.Env):
 
     def reset(self):
         self.steps = 0 # keeps track of how many steps have been done in this episode
-        self.state = np.zeros(self.L + 1) # first entry is current inventory, remaining entries are outstanding orders
-        self.state[0] = self.start_inv # setting starting inventory
+        self.state = np.zeros(self.L + 1) + self.opt_const # first entry is current inventory, remaining entries are outstanding orders, initialize all to optimal constant order amount
         return self.state
