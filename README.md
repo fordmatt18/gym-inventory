@@ -43,9 +43,9 @@ PPO_training_and_evaluation: performs PPO training on all problems using our ori
 
 Results:
 
-   logs: contains logs of all our PPO training evaluations. Tracks the policy performing throughout the training process for each problem,      and additionally saves a copy of the best model that was found throughout training. (The subfiles "logs" and "logs2" each contain a run      using our initial methodology, while the subfile "logs_largeL" contains a run of our updated methodology for the (p,L) = (99, 70) test      case.) 
+---logs: contains logs of all our PPO training evaluations. Tracks the policy performing throughout the training process for each problem,      and additionally saves a copy of  the best model that was found throughout training. (The subfiles "logs" and "logs2" each contain a run      using our initial methodology, while the subfile "logs_largeL"      contains a run of our updated methodology for the (p,L) = (99, 70) test      case.) 
 
-   objs: contains the pickle objects with the performance evaluation results of each policy. (The subfiles "objs" and "objs2" each contain a    run using our initial methodology)
+---objs: contains the pickle objects with the performance evaluation results of each policy. (The subfiles "objs" and "objs2" each contain a    run using our initial methodology)
 
 PPO_policy_plotting: creates plots of the training performance using info from the logs files. Additionally, for the L=1 case, creates visualizations of the trained policy.
 
