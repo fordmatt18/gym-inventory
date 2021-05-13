@@ -2,7 +2,7 @@
 
 The following is mostly taken from the latex write-up, where additional details can be located. 
 
-## Probelm Description
+## Problem Description
 
 Optimal inventory management is a major concern for many business.  Here,  we consider an inventory management problem that exhibits two key traits: positive lead times and lost sales. In a system with positive lead times, after an order for more inventory is placed, there is a delay before it is received [2].  This is a reasonable assumption because, in many real life situations, it takes a non-negligible amount of time for a product that is ordered to be produced and shipped to a business.  On the other hand, lost sales means that if there is more demand than there is inventory on hand, then any demand that is not fulfilled disappears and cannot be met at a later date [2]. In real life, this may occur when competing business(es) exist, as customers with unmet demand may simply take their business elsewhere [2].
 
@@ -33,7 +33,7 @@ A simple policy for this system is a constant-order policy, in which the same am
 Our ultimate goal will be to,  in a wide parameter space,  train policies using deep RL algorithms that achieve better performance than the best constant-order policy. Specifically, we will use PPO from the Stable Baselines3 package in Python. We focus our attention on the situation when p is large (and notably when L is small), as this is the region of parameter space with the largest optimality bounds [1]. 
 
 
-# Summary of Files
+## Summary of Files
 
 inventory: contains the files for the implementation of our problem in an OpenAI Gym environment, as described above.
 
@@ -52,7 +52,7 @@ PPO_policy_plotting: creates plots of the training performance using info from t
 create_tables: creates tables (comparable to table A.1. in Xin & Goldberg (2016)) that appear in the final write-up
 
 
-# Sources
+## Sources
 
 [1] Raffin, Antonin & Hill, Ashley & Ernestus, Maximilian & Gleave, Adam & Kanervisto, Anssi & Dormann, Noah. (2019). Stable Baselines3. GitHub, GitHub repository, https://github.com/DLR-RM/stable-baselines3
 
