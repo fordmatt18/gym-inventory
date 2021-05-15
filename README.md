@@ -23,21 +23,21 @@ The description of the MDP follows that in [2]. At each time t, first the order 
 
 ## Costs
 
-At the end of each time step, penalties occur in two situations: if there is leftover inventory (in which case the penalty is h > 0 per unit of remaining inventory) or lost sales (in which case the penalty is p > 0 per unit of unmet demand) [2]. We fix h = 1, but vary p throughout our implementation, as in [2]. The ultimate goal is to minimize the long run average cost [2]. The long run average cost was estimated in our simulations over a long time horizon (e.g., by truncating the infinite limit); tests were performed to ensure that this estimation method worked well enough for our purposes. 
+At the end of each time step, penalties occur in two situations: if there is leftover inventory (in which case the cost is h > 0 per unit of remaining inventory) or lost sales (in which case the cost is p > 0 per unit of unmet demand) [2]. We fix h = 1, but vary p throughout our implementation, as in [2]. The ultimate goal of this problem is to minimize the long-run average cost [2]. The long-run average cost was estimated in our simulations over a long time horizon (e.g., by truncating the infinite limit); tests were performed to ensure that this estimation method worked well for our purposes. 
 
 
 ## Constant Order Policy
 A simple policy for this system is a constant-order policy, which always orders the same amount of inventory [2]. Xin & Goldberg (2016) proved that as the lead time increases, the gap between the performance of the optimal policy and the best constant-order policy converges to zero exponentially fast. Upper bounds for the ratio of the performance between the best constant-order policy and the optimal policy are given for various parameter combinations in Table A.1 from Xin & Goldberg (2016).
 
 ## Goal
-Our goal is to train policies that achieve a smaller long run average cost than the corresponding best constant-order policy, across a variety of combinations of p and L. We use PPO from the Stable Baselines3 package in Python to train our policies. We focus our attention on the situation when p is large (and notably when L is small), as this is the region of parameter space with the largest optimality bounds (and thus, the most potential room for improvement) [2]. 
+Our goal is to train policies that achieve a smaller long-run average cost than the corresponding best constant-order policy, across a variety of combinations of p and L. We use PPO from the Stable Baselines3 package in Python to train our policies. We focus our attention on the situation when p is large (and notably when L is small), as this is the region of parameter space with the largest optimality bounds (and thus, the most potential room for improvement) [2]. 
 
 
 ## Summary of Files
 
 inventory: contains the files for the implementation of our problem in an OpenAI Gym environment, as described above.
 
-testing_policies: initial verification of our OpenAI Gym environment by testing several simple policies
+testing_policies: initial verification of our OpenAI Gym environment by testing several simple policies. (These results also provide validation for our method of estimating the long-run average cost.)
 
 PPO_training_and_evaluation: performs PPO training on all problems using our original methodology. Additionally performs PPO training using modified parameters for large L and large p on the test case (p,L) = (99, 70). Once the best policies are obtained, this file also evaluates their performances and saves the results as a pickle object.
 
