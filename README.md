@@ -59,6 +59,10 @@ A simple policy for this system is a constant-order policy, which always orders 
 ### Goal
 Our goal is to train policies that achieve a smaller long-run average cost than the corresponding best constant-order policy, across a variety of combinations of p and L. We use PPO from the Stable Baselines3 package in Python to train our policies. We focus our attention on the situation when p is large (and notably when L is small), as this is the region of parameter space with the largest optimality bounds (and thus, the most potential room for improvement) [2]. 
 
+### PPO Hyperparameters
+The starting policy for PPO was chosen to be similar to the best constant-order policy. For our initial run of PPO, we used the default parameters for PPO, except we set gamma = 1. 500000 total training steps were performed, and the policy was evaluated every 25000 steps (across 8 episodes with a time horizon of 20000). The best policy found during the training process was saved; the entire training process was repeated twice, and the overall best policy was taken from the two runs. This policy was then evaluated on 50 episodes with a time horizon of 20000 to produce the final performance results. 
+
+For the modified training procedure for the case of large L, we also set n_steps = 49152, learning_rate = .0002, and decreased the standard deviation of actions taken by the initial policy (from e^(-1) to e^(-2)). 2000000 total training steps were performed, and the policy was evaluated every 50000 steps (across 20 episodes with a time horizon of 20000). Five runs were performed, from which the best policy was taken and then evaluated (as before). 
 
 ### Sources
 
