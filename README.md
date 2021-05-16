@@ -12,7 +12,7 @@ inventory: contains the files for the implementation of our problem in an OpenAI
 
 testing_policies: initial verification of our OpenAI Gym environment by testing several simple policies. (These results also provide validation for our method of estimating the long-run average cost.)
 
-PPO_training_and_evaluation: performs PPO training on all problems using our original methodology. Additionally performs PPO training using modified parameters for large L and large p on the test case (p,L) = (99, 70). Once the best policies are obtained, this file also evaluates their performances and saves the results as a pickle object.
+PPO_training_and_evaluation: performs PPO training on all problems using our original methodology used to generate the table of ratios in our report. Additionally has comments of how to change hyperparameters to train a better policy on the large L and large p case with (p,L) = (99, 70). Once the best policies are obtained, this file also evaluates their performances and saves the results as a pickle object.
 
 PPO_policy_plotting: creates plots of the training performance using info from the logs files. Additionally, for the L=1 case, creates visualizations of the trained policy.
 
