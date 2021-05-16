@@ -1,7 +1,7 @@
 # About Code
 -------------
 ### Dependencies
-Python 3.x, pytorch, numpy, matplotlib, stable_baselines3
+Python 3.x, pytorch, numpy, matplotlib, stable_baselines3, pandas
 
 ### Installation
 Simply clone the repo
