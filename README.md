@@ -8,11 +8,11 @@ Simply clone the repo
 
 ### Summary of Files
 
-inventory: contains the files for the implementation of our problem in an OpenAI Gym environment, as described above.
+inventory: contains the files for the implementation of our problem in an OpenAI Gym environment, as described below.
 
 testing_policies: initial verification of our OpenAI Gym environment by testing several simple policies. (These results also provide validation for our method of estimating the long-run average cost.)
 
-PPO_training_and_evaluation: performs PPO training on all problems using our original methodology used to generate the table of ratios in our report. Additionally has comments of how to change hyperparameters to train a better policy on the large L and large p case with (p,L) = (99, 70). Once the best policies are obtained, this file also evaluates their performances and saves the results as a pickle object.
+PPO_training_and_evaluation: performs PPO training on all problems using our original methodology (used to generate the table of ratios in our report), and saves the results in a logs file. Additionally has comments of how to change hyperparameters to train better policies in the large L and large p region, with the test case being (p,L) = (99, 70). Once the best policies are obtained, this file also evaluates their performances and saves the results as a pickle object.
 
 PPO_policy_plotting: creates plots of the training performance using info from the logs files. Additionally, for the L=1 case, creates visualizations of the trained policy.
 
@@ -50,19 +50,19 @@ The description of the MDP follows that in [2]. At each time t, first the order 
 
 ### Costs
 
-At the end of each time step, penalties occur in two situations: if there is leftover inventory (in which case the cost is h > 0 per unit of remaining inventory) or lost sales (in which case the cost is p > 0 per unit of unmet demand) [2]. We fix h = 1, but vary p throughout our implementation, as in [2]. The ultimate goal of this problem is to minimize the long-run average cost [2]. The long-run average cost was estimated in our simulations over a long time horizon (e.g., by truncating the infinite limit); tests were performed to ensure that this estimation method worked well for our purposes. 
+At the end of each time step, penalties occur in two situations: if there is leftover inventory (in which case the cost is h > 0 per unit of remaining inventory) or lost sales (in which case the cost is p > 0 per unit of unmet demand) [2]. We fix h = 1, but vary p and L throughout our implementation, as in [2]. The ultimate goal of this problem is to minimize the long-run average cost [2]. The long-run average cost was estimated in our simulations over a long time horizon (e.g., by truncating the infinite limit); tests were performed to ensure that this estimation method worked well for our purposes. 
 
 
 ### Constant Order Policy
 A simple policy for this system is a constant-order policy, which always orders the same amount of inventory [2]. Xin & Goldberg (2016) proved that as the lead time increases, the gap between the performance of the optimal policy and the best constant-order policy converges to zero exponentially fast. Upper bounds for the ratio of the performance between the best constant-order policy and the optimal policy are given for various parameter combinations in Table A.1 from Xin & Goldberg (2016).
 
 ### Goal
-Our goal is to train policies that achieve a smaller long-run average cost than the corresponding best constant-order policy, across a variety of combinations of p and L. We use PPO from the Stable Baselines3 package in Python to train our policies. We focus our attention on the situation when p is large (and notably when L is small), as this is the region of parameter space with the largest optimality bounds (and thus, the most potential room for improvement) [2]. 
+Our goal is to train policies that achieve a smaller long-run average cost than the corresponding best constant-order policy, across a variety of combinations of p and L. We use PPO from the Stable Baselines3 package in Python ([1]) to train our policies. We focus our attention on the situation when p is large (and notably when L is small), as this is the region of parameter space with the largest optimality bounds (and thus, the most potential room for improvement) [2]. 
 
 ### PPO Hyperparameters
-The starting policy for PPO was chosen to be similar to the best constant-order policy. For our initial run of PPO, we used the default parameters for PPO, except we set gamma = 1. 500000 total training steps were performed, and the policy was evaluated every 25000 steps (across 8 episodes with a time horizon of 20000). The best policy found during the training process was saved; the entire training process was repeated twice, and the overall best policy was taken from the two runs. This policy was then evaluated on 50 episodes with a time horizon of 20000 to produce the final performance results. 
+The starting policy for PPO was chosen to be similar to the best constant-order policy. In our initial training procedure, we used the default parameters for PPO, except we set gamma = 1. 500000 total training steps were performed, and the policy was evaluated every 25000 steps (across 8 episodes with a time horizon of 20000). The best policy found during the training process was saved; this policy was then evaluated on 50 episodes with a time horizon of 20000 to produce the final performance results. The entire training process was repeated twice, and the overall best policy was taken from the two runs. 
 
-For the modified training procedure for the case of large L, we also set n_steps = 49152, learning_rate = .0002, and decreased the standard deviation of actions taken by the initial policy (from e^(-1) to e^(-2)). 2000000 total training steps were performed, and the policy was evaluated every 50000 steps (across 20 episodes with a time horizon of 20000). Five runs were performed, from which the best policy was taken and then evaluated (as before). 
+For the modified training procedure for the case of large L and large p, we also set n_steps = 49152, learning_rate = .0002, and decreased the standard deviation of actions taken by the initial policy (from e^(-1) to e^(-2)). 2000000 total training steps were performed, and the policy was evaluated every 50000 steps (across 20 episodes with a time horizon of 20000). Evaluation of the best policy is the same as before, but five total runs were performed as opposed to two.
 
 ### Sources
 
